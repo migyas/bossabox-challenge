@@ -5,7 +5,7 @@ interface TextProps {
   component?: any;
   modifiers?: string[];
   style?: CSSProperties;
-  children: string;
+  children: any;
 }
 const Text: React.FC<TextProps> = ({
   component,

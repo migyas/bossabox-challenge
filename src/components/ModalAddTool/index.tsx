@@ -4,63 +4,63 @@ import { FiCheckSquare } from 'react-icons/fi';
 import { FormHandles } from '@unform/core';
 import { Form } from './styles';
 import Modal from '../Modal';
+import Input from '../Input';
 
-interface IFoodPlate {
+interface ITools {
   id: number;
-  name: string;
-  image: string;
-  price: string;
+  title: string;
+  link: string;
   description: string;
-  available: boolean;
+  tags: string;
 }
 
-interface ICreateFoodData {
-  name: string;
-  image: string;
-  price: string;
+interface ICreateToolData {
+  title: string;
+  link: string;
   description: string;
+  tags: string;
 }
 
 interface IModalProps {
   isOpen: boolean;
+  isOpenRemove: boolean;
   setIsOpen: () => void;
-  handleAddFood: (food: Omit<IFoodPlate, 'id' | 'available'>) => void;
+  handleAddTool: (tool: Omit<ITools, 'id' >) => void;
 }
 
-const ModalAddFood: React.FC<IModalProps> = ({
+const ModalAddTool: React.FC<IModalProps> = ({
   isOpen,
   setIsOpen,
-  handleAddFood,
+  isOpenRemove,
+  handleAddTool,
 }) => {
   const formRef = useRef<FormHandles>(null);
 
   const handleSubmit = useCallback(
-    async (data: ICreateFoodData) => {
-      const { name, image, price, description 
-} = data;
-      handleAddFood({
-        name,
-        image,
-        price,
-        description,
-      });
+    async (data: ICreateToolData) => {
+      const { title, link, description, tags } = data;
+      handleAddTool({ title, link, description, tags });
+
       setIsOpen();
     },
-    [handleAddFood, setIsOpen],
+    [handleAddTool, setIsOpen],
   );
 
   return (
-    <Modal isOpen={isOpen} setIsOpen={setIsOpen}>
+    <Modal isOpen={isOpen} setIsOpen={setIsOpen} isOpenRemove={isOpenRemove}>
       <Form ref={formRef} onSubmit={handleSubmit}>
-        <h1>Novo Prato</h1>
-        <Input name="image" placeholder="Cole o link aqui" />
-
-        <Input name="name" placeholder="Ex: Moda Italiana" />
-        <Input name="price" placeholder="Ex: 19.90" />
-
+        <h1>Nova Ferramenta</h1>
+        <span>Nome da Ferramenta</span>
+        <Input name="title" placeholder="Ex: React Native" />
+        <span>Link da Ferramenta</span>
+        <Input name="link" placeholder="Cole o link" />
+        <span>Descrição da Ferramenta</span>
         <Input name="description" placeholder="Descrição" />
-        <button type="submit" data-testid="add-food-button">
-          <p className="text">Adicionar Prato</p>
+        <span>Crie suas tags</span>
+        <Input name="tags" placeholder="Crie suas tags" />
+
+        <button type="submit" data-testid="add-tool-button">
+          <p className="text">Adicionar Ferramenta</p>
           <div className="icon">
             <FiCheckSquare size={24} />
           </div>
@@ -70,4 +70,4 @@ const ModalAddFood: React.FC<IModalProps> = ({
   );
 };
 
-export default ModalAddFood;
+export default ModalAddTool;

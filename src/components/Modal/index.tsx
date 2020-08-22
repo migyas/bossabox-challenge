@@ -14,21 +14,27 @@ interface IFoodPlate {
 interface IModalProps {
   children: any;
   isOpen: boolean;
+  isOpenRemove: boolean;
   setIsOpen: () => void;
 }
 
-const Modal: React.FC<IModalProps> = ({ children, isOpen, setIsOpen }) => {
+const Modal: React.FC<IModalProps> = ({ children, isOpen, isOpenRemove,  setIsOpen }) => {
   const [modalStatus, setModalStatus] = useState(isOpen);
+  const [modalStatusRemove, setModalStatusRemove] = useState(isOpenRemove);
 
   useEffect(() => {
     setModalStatus(isOpen);
   }, [isOpen]);
 
+  useEffect(() => {
+    setModalStatusRemove(isOpenRemove);
+  }, [isOpenRemove]);
+
   return (
     <ReactModal
       shouldCloseOnOverlayClick={!false}
       onRequestClose={setIsOpen}
-      isOpen={modalStatus}
+      isOpen={modalStatus || modalStatusRemove}
       ariaHideApp={false}
       style={{
         content: {
