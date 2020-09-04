@@ -1,8 +1,9 @@
 import React, { useRef, useCallback } from 'react';
-
-import { FiCheckSquare } from 'react-icons/fi';
 import { FormHandles } from '@unform/core';
+import * as Yup from 'yup';
+
 import { Form } from './styles';
+import Text from '../Text';
 import Modal from '../Modal';
 import Input from '../Input';
 
@@ -23,7 +24,6 @@ interface ICreateToolData {
 
 interface IModalProps {
   isOpen: boolean;
-  isOpenRemove: boolean;
   setIsOpen: () => void;
   handleAddTool: (tool: Omit<ITools, 'id' >) => void;
 }
@@ -31,7 +31,6 @@ interface IModalProps {
 const ModalAddTool: React.FC<IModalProps> = ({
   isOpen,
   setIsOpen,
-  isOpenRemove,
   handleAddTool,
 }) => {
   const formRef = useRef<FormHandles>(null);
@@ -41,29 +40,36 @@ const ModalAddTool: React.FC<IModalProps> = ({
       const { title, link, description, tags } = data;
       handleAddTool({ title, link, description, tags });
 
+      try {
+
+      } catch (err) {
+        console.log(err)
+      }
+
       setIsOpen();
     },
     [handleAddTool, setIsOpen],
   );
 
   return (
-    <Modal isOpen={isOpen} setIsOpen={setIsOpen} isOpenRemove={isOpenRemove}>
+    <Modal isOpen={isOpen} setIsOpen={setIsOpen} >
       <Form ref={formRef} onSubmit={handleSubmit}>
-        <h1>Nova Ferramenta</h1>
-        <span>Nome da Ferramenta</span>
-        <Input name="title" placeholder="Ex: React Native" />
-        <span>Link da Ferramenta</span>
-        <Input name="link" placeholder="Cole o link" />
-        <span>Descrição da Ferramenta</span>
-        <Input name="description" placeholder="Descrição" />
-        <span>Crie suas tags</span>
+        <Text component="h1" modifiers={['header3']}>Nova Ferramenta</Text>
+
+        <Text component="span" modifiers={['body']}>Nome da Ferramenta</Text>
+        <Input name="title" placeholder="Ex: React Native" required />
+
+        <Text component="span" modifiers={['body']}>Link da Ferramenta</Text>
+        <Input name="link" placeholder="Ex: notion.io" required />
+
+        <Text component="span" modifiers={['body']}>Descrição da Ferramenta</Text>
+        <Input name="description" placeholder="Descrição" required />
+
+        <Text component="span" modifiers={['body']}>Crie suas tags</Text>
         <Input name="tags" placeholder="Crie suas tags" />
 
         <button type="submit" data-testid="add-tool-button">
           <p className="text">Adicionar Ferramenta</p>
-          <div className="icon">
-            <FiCheckSquare size={24} />
-          </div>
         </button>
       </Form>
     </Modal>

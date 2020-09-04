@@ -1,9 +1,9 @@
-import React, { useRef, useState, useCallback } from 'react';
+import React, { useRef, useCallback } from 'react';
 
 import { FormHandles } from '@unform/core';
 import { Form } from './styles';
 import Modal from '../Modal';
-import api from "../../services/api";
+import Text from '../Text';
 
 interface ITools {
   id: number ;
@@ -12,41 +12,37 @@ interface ITools {
 interface IModalProps {
   tool: ITools,
   isOpen: boolean;
-  isOpenRemove: boolean;
   setIsOpen: () => void;
-  handleDeleteTool: (id: number) => Promise<void>;
+  handleDelete: (id: number) => {};
 }
 
-
-const ModalRemoveTool: React.FC<IModalProps> = ({tool, isOpen, setIsOpen, isOpenRemove, handleDeleteTool}) => {
+const ModalRemoveTool: React.FC<IModalProps> = ({tool, isOpen, setIsOpen, handleDelete}) => {
   const formRef = useRef<FormHandles>(null);
-  const [modalOpen, setModalOpen] = useState(false);
 
-  const handleRemove = useCallback(
+  const handleSubmit = useCallback(
     async (data: ITools) => {
+      const { id } = data;
+      handleDelete( id );
 
-      handleDeleteTool(data.id);
       setIsOpen();
     },
-    [handleDeleteTool, setIsOpen],
+    [handleDelete, setIsOpen],
   );
 
-  function toggleModal(): void {
-    setModalOpen(!modalOpen);
-  }
-
   return (
-    <Modal isOpen={isOpen} setIsOpen={setIsOpen} isOpenRemove={isOpenRemove} >
-      <Form ref={formRef} onSubmit={handleRemove} >
-        <h1>Excluir Ferramenta</h1>
+    <Modal isOpen={isOpen} setIsOpen={setIsOpen} >
+      <Form ref={formRef} onSubmit={handleSubmit} >
+        <Text component="h1" modifiers={['header4']}>Deseja Excluir?</Text>
+        <Text component="span" modifiers={['body']}>*Essa ação não tem mais volta</Text>
 
-        <button type="submit" onClick={()=> toggleModal} >
+        <button type="button" onClick={setIsOpen} className="no" >
           <p className="text">Não</p>
         </button>
         <button
           type="submit"
-          onClick={() => handleDeleteTool(tool.id)}
+          onClick={() => handleDelete(tool.id)}
           data-testid={`remove-tool-${tool.id}`}
+          className="yes"
         >
           <p className="text">Sim</p>
         </button>

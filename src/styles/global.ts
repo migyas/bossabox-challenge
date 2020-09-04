@@ -19,6 +19,7 @@ export default createGlobalStyle`
   body {
     background: #FCFCFD;
     -webkit-font-smoothing: antialiased;
+    z-index: 9999;
   }
 
   body, input, button {

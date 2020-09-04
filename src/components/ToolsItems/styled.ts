@@ -3,6 +3,7 @@ import styled from 'styled-components';
 export const Container = styled.div`
   margin-top: 6rem;
   margin-bottom: 4rem;
+  max-width: 115rem;
 `;
 
 export const SearchItem = styled.div`
@@ -16,6 +17,13 @@ export const SearchItem = styled.div`
   flex-direction: column;
   justify-items: flex-end;
 `;
+
+export const SearchTags = styled.div`
+  display: flex;
+    flex-wrap: wrap;
+`;
+
+
 
 export const Button = styled.button`
   border: none;

@@ -7,22 +7,21 @@ interface IContainerProps {
 export const Container = styled.div<IContainerProps>`
   display: flex;
   align-items: center;
+  position: relative;
 
-  background: #fff;
-  border-radius: 8px;
-  padding: 18px 24px;
-  width: 100%;
-  font-size: 16px;
+  input {
+    width: 100%;
+    font-size: 1.6rem;
+    padding: 1rem;
+    background: #f5f4f6 0% 0% no-repeat padding-box;
+    color: #8f8a9b;
+    border: 1px solid #ebeaed;
+    border-radius: 5px;
+    margin-top: .5rem;
 
-  & + div {
-    margin-top: 24px;
-  }
-
-  h1 {
-    margin-bottom: 40px;
-    font-weight: 600;
-    font-size: 36px;
-    line-height: 36px;
+    &::placeholder {
+      color: #b7b7cc;
+    }
   }
 
   ${props =>
@@ -31,19 +30,5 @@ export const Container = styled.div<IContainerProps>`
       color: #ff9000;
       border-color: #ff9000;
     `}
-
-  input {
-    flex: 1;
-    background: transparent;
-    border: 0;
-    color: #b7b7cc;
-
-    &::placeholder {
-      color: #b7b7cc;
-    }
-  }
-
-  svg {
-    margin-right: 16px;
-  }
 `;
+

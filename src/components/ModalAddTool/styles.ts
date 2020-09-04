@@ -6,23 +6,20 @@ export const Form = styled(Unform)`
   display: flex;
   flex-direction: column;
 
-  h1 {
-    font-weight: 600;
-    font-size: 36px;
-    line-height: 36px;
-    margin-bottom: 40px;
+  button {
+    margin-top: 2.8rem;
   }
 
-  button {
-    margin-top: 48px;
-    align-self: flex-end;
+  span {
+    font-size: 1.6rem;
+    margin-top: 2rem;
   }
 
   button {
     font-weight: 600;
-    border-radius: 8px;
+    border-radius: 5px;
     border: 0;
-    background: #39b100;
+    background: #365DF0;
     color: #fff;
 
     display: flex;
@@ -30,14 +27,9 @@ export const Form = styled(Unform)`
     align-items: center;
 
     .text {
+      font-size: 1.8rem;
+      font-weight: normal;
       padding: 16px 24px;
-    }
-
-    .icon {
-      display: flex;
-      padding: 16px 16px;
-      background: #41c900;
-      border-radius: 0 8px 8px 0;
       margin: 0 auto;
     }
   }

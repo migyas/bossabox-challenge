@@ -1,92 +1,39 @@
 import styled from 'styled-components';
+import { Form as Unform } from '@unform/web';
 
 export const Container = styled.div`
   display: flex;
   justify-content: center;
-  max-width: 110rem;
   margin: 0 auto;
+  padding: 0 5rem;
 `;
 
-export const Content = styled.div``;
+export const Content = styled.div`
+  max-width: 115rem;
+  width: 100%;
+`;
 
 export const MainSearch = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: relative;
 
-  .container {
-    display: block;
-    position: relative;
-    padding-left: 2.5rem;
-    margin-bottom: 12px;
-    cursor: pointer;
-    font-size: 22px;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-  }
+  div {
 
-  .container input {
-    position: absolute;
-    opacity: 0;
-    cursor: pointer;
-    height: 0;
-    width: 0;
-  }
-
-  .checkmark {
-    position: absolute;
-    top: 1rem;
-    left: -0.5rem;
-    height: 18px;
-    width: 18px;
-    border-radius: 3px;
-    background-color: #f5f4f6;
-    border: 1px solid #dedce1;
-    transition: all 0.3s;
-  }
-
-  .checktext {
-    display: inline-block;
-    font-size: 1.6rem;
-    padding-top: 0.9rem;
-  }
-
-  .container:hover input ~ .checkmark {
-    background-color: #dedce1;
-  }
-
-  .container input:checked ~ .checkmark {
-    background-color: #2196f3;
-  }
-
-  .checkmark:after {
-    content: '';
-    position: absolute;
-    display: none;
-  }
-
-  .container input:checked ~ .checkmark:after {
-    display: block;
-  }
-
-  .container .checkmark:after {
-    top: 0;
-    left: 0.5rem;
-    width: 5px;
-    height: 10px;
-    border: solid white;
-    border-width: 0 1.5px 1.5px 0;
-    -webkit-transform: rotate(45deg);
-    -ms-transform: rotate(45deg);
-    transform: rotate(45deg);
+    svg {
+      position: absolute;
+      // color: #8f8a9b;
+      color: red;
+      top: 1.4rem;
+      left: .5rem;
+    }
   }
 `;
 
 export const MainResults = styled.div``;
 
-export const Form = styled.div`
+export const Form = styled(Unform)`
   display: flex;
   align-items: center;
   position: relative;
